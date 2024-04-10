@@ -1,0 +1,240 @@
+.car-rent-body-main-container {
+    margin: 0;
+    padding: 0;
+    /* background-color: #ffffff; */
+    font-family: 'Poppins', sans-serif;
+}
+
+a {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+.cr-footer-txt a:hover {
+    color: #1572d3 !important;
+    text-decoration: underline !important;
+}
+
+.clickable:hover {
+    cursor: pointer;
+}
+
+.cr-flex {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.cr-flex-start {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.cr-flex-center {
+    display: flex;
+    justify-content: center;
+}
+
+.cr-flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.cr-flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.cr-align-item {
+    display: flex;
+    align-items: center;
+}
+
+.cr-text-align {
+    text-align: center;
+}
+
+.cr-btn-text {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+}
+
+.cr-btn {
+    background-color: #1572d3;
+    color: #ffffff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.cr-btn-text {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+}
+
+.cr-title-tab {
+    background-color: rgba(21, 114, 211, 0.1);
+    padding: 16px 32px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 150%;
+    color: #1572d3;
+    border: transparent;
+    border-radius: 8px;
+}
+
+.cr-title-div {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 150%;
+    color: #000000;
+}
+
+.cr-txt-div {
+    font-weight: 500;
+    font-size: 38px;
+    line-height: 130%;
+}
+
+.cr-desc-div {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #6d6d6d;
+}
+
+.cr-reating-text {
+    font-weight: 400;
+    font-size: 12px;
+    color: #000000;
+}
+
+.cr-reviews-text {
+    font-weight: 400;
+    font-size: 12px;
+    color: #808080;
+}
+
+.cr-feature-text {
+    font-weight: 400;
+    font-size: 12px;
+    color: #959595;
+    display: flex;
+    align-items: center;
+}
+
+.cr-price-txt {
+    font-weight: 500;
+    font-size: 14px;
+    color: #595959;
+    display: flex;
+    align-items: center;
+}
+
+.price-amt {
+    font-size: 16px;
+    font-weight: 600;
+    color: #292929;
+}
+
+.price-day {
+    font-size: 14px;
+    font-weight: 500;
+    color: #9c9c9c;
+}
+
+.testimonial-tab-place {
+    font-size: 14px;
+    font-weight: 400;
+    color: #838383;
+    line-height: 150%;
+}
+
+.cr-footer-txt {
+    font-size: 14px;
+    font-weight: 400;
+    color: #d6d6d6;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative; /* Ensure position:relative for close button positioning */
+}
+
+.car-rent-form-title {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-weight: 600;
+}
+
+.close {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.cr-car-rent-btn {
+    border: none;
+    background-color: #1572d3;
+    padding: 5px 20px;
+}
+
+.cr-car-rent-form-gap {
+    text-align: left;
+    padding-top: 10px;
+}
+
+.cr-car-rent-info {
+    padding: 10px 20px 10px 20px;
+    row-gap: 15px;
+}
+
+.cr-car-rent-form-size-div {
+    width: 100%;
+}
+
+.cr-car-rent-form-size {
+    width: 48%;
+}
+
+.input-box-div {
+    height: 25px;
+    display: flex;
+    align-items: center;
+}
+
+.input-box-div-half {
+    height: 25px;
+}
+
+.input-box-div-width {
+    width: 400px;
+}
+
+.cr-car-rent-form-row-gap {
+    row-gap: 2px;
+}

@@ -1,0 +1,38 @@
+.web-download {
+    margin: 72px 72px 0px 160px;
+    column-gap: 30px;
+}
+
+.web-download-img-div {
+    display: flex;
+}
+
+.web-download-img-div img {
+    height: auto;
+    width: auto;
+}
+
+.web-download-desc {
+    font-size: 48px;
+    font-weight: 600;
+    color: #282828;
+}
+
+.web-download-txt-div {
+    max-width: 480px;
+    row-gap: 24px;
+}
+
+.web-download-info {
+    font-size: 16px;
+    font-weight: 400;
+    color: #3e3e3e;
+}
+
+.web-download-download {
+    column-gap: 16.26px;
+}
+
+.web-download-flex-div {
+    row-gap: 40px;
+}
