@@ -1,0 +1,13 @@
+.header-bg-color {
+    background-color: #3e5d7a;
+    color: #ffffff;
+}
+
+.profile-icon-color {
+    color: #ffffff;
+}
+
+.header-padding {
+    padding: 3px 0px;
+    z-index: 1001;
+}
