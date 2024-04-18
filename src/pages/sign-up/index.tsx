@@ -10,7 +10,7 @@ import LogIn from '../../images/login-img.jpg';
 import GoogleImg from '../../images/google.svg';
 import Logo from '../../images/logo.svg';
 
-const SignIn = () => {
+const SignUp = () => {
     const navigate = useNavigate();
 
     const handleNavigation = (path: string) => {
@@ -106,4 +106,4 @@ const SignIn = () => {
 
 };
 
-export default SignIn;
+export default SignUp;
