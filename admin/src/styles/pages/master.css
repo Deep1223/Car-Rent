@@ -1,0 +1,9 @@
+.full-height-container {
+    height: 560px;
+    background-color: white;
+    border: 2px solid #dfe5ec;
+}
+
+.custom-search-box {
+    border-color: #bfc9d4;
+}

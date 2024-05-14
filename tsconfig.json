@@ -18,7 +18,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    "paths": {
+      "@fortawesome/react-fontawesome": ["../node_modules/@fortawesome/react-fontawesome"]
+    }
   },
   "include": [
     "src"

@@ -1,0 +1,50 @@
+.become-a-renter {
+    margin: 70px 0px 0px 160px;
+}
+
+.become-a-renter-txt-img {
+    position: relative;
+    display: inline-block;
+}
+
+.become-a-renter-txt-img::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 15px;
+    background-image: url('../../images/underline\ 1.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.become-a-renter-div {
+    max-width: 390px;
+    row-gap: 40px;
+    padding-top: 40px;
+}
+
+.become-a-renter-download {
+    justify-content: flex-start;
+    column-gap: 11.51px;
+}
+
+.become-a-renter-title {
+    font-size: 48px;
+    font-weight: 600;
+    color: #242424;
+    position: relative;
+}
+
+.become-a-renter-desc {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 150%;
+    color: #272727;
+}
+
+.become-a-renter-img-div {
+    max-width: 100%;
+    height: auto;
+}

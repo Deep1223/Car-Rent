@@ -1,0 +1,30 @@
+.header {
+    margin: 40px 160px;
+    position: relative;
+}
+
+.header-component-div {
+    column-gap: 40px;
+    flex-wrap: wrap;
+}
+
+.header-login-div {
+    column-gap: 24px;
+    flex-wrap: wrap;
+}
+
+.header-component {
+    align-items: center;
+}
+
+.header-signup-button-div {
+    background-color: #1572d3;
+    color: #ffffff;
+    border: transparent;
+    border-radius: 8px;
+    padding: 16px 32px;
+}
+
+.footer-header-div {
+    border-color: #575757;
+}

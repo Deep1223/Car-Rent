@@ -1,0 +1,85 @@
+.popular-rental-deals {
+    align-items: center;
+    text-align: center;
+    background-color: #ffffff;
+    position: relative;
+    z-index: 1;
+}
+
+.popular-rental-deals-margin-div {
+    margin: 0px 160px 60px 160px;
+}
+
+.popular-rental-deals-flex-div {
+    padding-top: 22px;
+    row-gap: 34px;
+}
+
+.popular-rental-deals-cars {
+    max-width: 280px;
+    border: 1px solid transparent;
+    background-color: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 26px 24px;
+    border-radius: 16px;
+}
+
+.popular-rental-deals-flex {
+    column-gap: 20px;
+    row-gap: 8px;
+    background-color: #ffffff;
+    border-radius: 16px;
+}
+
+.popular-rental-deals-feature-div {
+    width: 130px;
+    column-gap: 7px;
+}
+
+.popular-rental-deals-tab {
+    column-gap: 20px;
+    row-gap: 24px 
+}
+
+.popular-rental-deals-info {
+    row-gap: 16px;
+}
+
+.populer-rental-deals-info-div {
+    row-gap: 12px;
+    text-align: start;
+}
+
+.popular-rental-deals-price-info {
+    row-gap: 24px;
+    border: 1px solid #acacac;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+    padding-top: 24px;
+}
+
+.popular-rental-deals-rent-div {
+    padding: 8px;
+    justify-content: center;
+    column-gap: 10px;
+}
+
+.popular-rental-deals-img {
+    padding-bottom: 20px;
+}
+
+.popular-rental-deals-info-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: #262626;
+    padding: 0px 5px;
+}
+
+.popular-rental-deals-info-reating {
+    column-gap: 7px;
+}
+
+.popular-rental-deals-img {
+    height: 104px;
+}

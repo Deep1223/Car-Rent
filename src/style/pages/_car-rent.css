@@ -1,0 +1,43 @@
+.cr-background-group {
+    position: absolute;
+    z-index: -1;
+    right: 0;
+    top: 0;
+    opacity: 0.3;
+    height: auto;
+    width: auto;
+}
+
+.why-choose-us-triangle {
+    margin-left: -180px;
+    margin-top: 0px;
+    position: absolute;
+    z-index: -1;
+    height: auto;
+    width: auto;
+}
+
+.testimonial-coma-img {
+    margin: 50px 106px;
+    position: absolute;
+    width: 85%;
+}
+
+
+.testimonial-left-coma-img {
+    margin-top: -130px;
+    display: flex;
+    justify-content: flex-end;
+    z-index: -1;
+}
+
+.web-download-triangle {
+    margin-left: -210px;
+    margin-top: -100px;
+    z-index: -3;
+    position: absolute;
+}
+
+.icon-color {
+    color: #1572d3;
+}

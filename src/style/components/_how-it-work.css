@@ -1,0 +1,44 @@
+.how-it-work {
+    margin: 20px 0px 60px 0px;
+    width: 100%;
+}
+
+.how-it-work-flex-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 36px;
+    margin: 91px;
+}
+
+.how-it-work-icon {
+    background-color: #ECF5FF;
+    padding: 32px;
+    border: 1px solid transparent;
+    border-radius: 16px;
+    width: fit-content;
+    display: flex;
+}
+
+.how-it-work-info {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 150%;
+    color: #6d6d6d;
+}
+
+.how-it-work-tabs {
+    max-width: 165px;
+    align-items: center;
+    text-align: center;
+    row-gap: 10px;
+}
+
+.how-it-work-flex {
+    column-gap: 200px;
+}
+
+.how-it-work-company img {
+    width: 100%;
+}

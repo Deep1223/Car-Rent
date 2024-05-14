@@ -1,0 +1,48 @@
+.rental-deals {
+    margin-left: 160px;
+    margin-right: 160px;
+    padding: 12px 12px 12px 32px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+}
+
+
+.cr-rental-deals-gap {
+    column-gap: 16px;
+}
+
+.cr-rental-deals-tab {
+    border: 1px solid #acacac;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+    padding: 0px 24px;
+}
+
+.rental-deals-div {
+    column-gap: 50px;
+}
+
+.rental-deals-info-div {
+    row-gap: 5px;
+}
+
+.rental-deals-title {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 150%;
+    color: #3e3e3e;
+}
+
+.rental-deals-timestamp {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 150%;
+    color: #b6b6b6;
+}
+
+.rental-deals-search-button {
+    padding: 8px 48px;
+    column-gap: 8px;
+}
