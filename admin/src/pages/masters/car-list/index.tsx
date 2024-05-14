@@ -1,64 +1,107 @@
-import React, { lazy, useState, ChangeEvent } from 'react';
+import React, { lazy, useState, ChangeEvent, FormEvent, useEffect } from 'react';
+import axios from 'axios';
 import DataTable from 'react-data-table-component';
 import TableStyles from '../../../components/tablestyle';
 
 const Footer = lazy(() => import('../../../common/footer'));
 
-interface MyData {
-    id: any;
-    name: any;
-    email: any;
-    age: any;
+interface FormData {
+    id?: any;
+    name: string;
+    image: string;
+    passengers?: string;
+    passengersid: string;
+    gear?: string;
+    gearid: string;
+    coolingtype?: string;
+    coolingtypeid: string;
+    doorstype?: string;
+    doorstypeid: string;
+    price: string | number;
+    timestamp?: any;
+    errors?: { [key: string]: string };
 }
 
 const CarList: React.FC = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [isAdding, setIsAddingtext] = useState<boolean>(false); // Flag to indicate whether adding or editing
-    const [editedRow, setEditedRow] = useState<MyData | null>(null); // State to hold data of the currently edited row
+    const [formData, setFormData] = useState<FormData>({
+        name: "",
+        image: "",
+        passengersid: "",
+        gearid: "",
+        coolingtypeid: "",
+        doorstypeid: "",
+        price: "",
+    });
+    const [carsdata, setCarsData] = useState<FormData[]>([]);
+    const [id, setid] = useState('');
+    const [searchQuery, setSearchQuery] = useState('');
 
     const closeSidebar = () => {
         setSidebarOpen(false);
     }
 
-    const OpenSidebar = (adding: boolean, row?: MyData) => {
+    const OpenSidebar = (adding: boolean, row?: FormData) => {
         setIsAddingtext(adding);
-        setEditedRow(row || null); // If row is provided, set it as editedRow, otherwise set to null
         setSidebarOpen(true);
-    }
-
-    const handleEdit = (row: MyData) => {
-        OpenSidebar(false, row); // Pass the row data to the sidebar for editing
-    }
-
-    const handleDelete = (row: MyData) => {
-        // Handle delete action here
-        console.log("Deleting row:", row);
+        if (adding) {
+            handleReset();
+        }
     }
 
     const columns = [
         {
             name: 'Name',
-            selector: (row: MyData) => row.name,
+            selector: (row: FormData) => row.name,
             sortable: true,
         },
         {
-            name: 'Email',
-            selector: (row: MyData) => row.email,
+            name: 'Image',
+            cell: (row: FormData) => {
+                const timestamp = new Date(row.timestamp);
+                const year = timestamp.getFullYear();
+                const month = String(timestamp.getMonth() + 1).padStart(2, '0');
+                return (
+                    <a href={`/images/${year}/${month}/car-list/${row.image}`} target="_blank" rel="noreferrer noopener">
+                        <img src={`/images/${year}/${month}/car-list/${row.image}`} alt={row.name} style={{ maxWidth: '50px', height: '39px', padding: '5px 0px' }} />
+                    </a>
+                );
+            }
+        },
+        {
+            name: 'passengers',
+            selector: (row: FormData) => row.passengers || '',
             sortable: true,
         },
         {
-            name: 'Age',
-            selector: (row: MyData) => row.age,
+            name: 'gear',
+            selector: (row: FormData) => row.gear || '',
+            sortable: true,
+        },
+        {
+            name: 'coolingtype',
+            selector: (row: FormData) => row.coolingtype || '',
+            sortable: true,
+        },
+        {
+            name: 'doorstype',
+            selector: (row: FormData) => row.doorstype || '',
+            sortable: true,
+        },
+        {
+            name: 'price',
+            selector: (row: FormData) => row.price,
             sortable: true,
         },
         {
             name: 'Actions',
-            cell: (row: MyData) => (
+            cell: (row: FormData) => (
                 <div className="d-flex flex-row gap-3">
-                    <a href="#" onClick={() => handleEdit(row)} className="text-decoration-none text-dark">
+                    <a href="#" onClick={() => handleEdit(row.id)} className="text-decoration-none text-dark">
                         <i className="bi bi-pencil-square"></i>
                     </a>
-                    <a href="#" onClick={() => handleDelete(row)} className="text-decoration-none text-dark">
+                    <a href="#" onClick={() => handleDelete(row.id)} className="text-decoration-none text-dark">
                         <i className="bi bi-trash"></i>
                     </a>
                 </div>
@@ -66,145 +109,160 @@ const CarList: React.FC = () => {
         }
     ];
 
-    const data: MyData[] = [
-        {
-            id: 1,
-            name: 'John',
-            email: 'john@example.com',
-            age: '25'
-        },
-        {
-            id: 2,
-            name: 'Jane',
-            email: 'jane@example.com',
-            age: '30'
-        },
-        {
-            id: 3,
-            name: 'Alice',
-            email: 'alice@example.com',
-            age: '28'
-        },
-        {
-            id: 4,
-            name: 'Bob',
-            email: 'bob@example.com',
-            age: '33'
-        },
-        {
-            id: 5,
-            name: 'Eve',
-            email: 'eve@example.com',
-            age: '27'
-        },
-        {
-            id: 6,
-            name: 'David',
-            email: 'david@example.com',
-            age: '31'
-        },
-        {
-            id: 7,
-            name: 'Emma',
-            email: 'emma@example.com',
-            age: '29'
-        },
-        {
-            id: 8,
-            name: 'Michael',
-            email: 'michael@example.com',
-            age: '35'
-        },
-        {
-            id: 9,
-            name: 'Sophia',
-            email: 'sophia@example.com',
-            age: '26'
-        },
-        {
-            id: 10,
-            name: 'William',
-            email: 'william@example.com',
-            age: '32'
-        },
-        {
-            id: 11,
-            name: 'Olivia',
-            email: 'olivia@example.com',
-            age: '34'
-        },
-        {
-            id: 12,
-            name: 'John Doe',
-            email: 'john.doe@example.com',
-            age: '28'
-        },
-        {
-            id: 13,
-            name: 'Jane Doe',
-            email: 'jane.doe@example.com',
-            age: '26'
-        },
-        {
-            id: 14,
-            name: 'Alice Smith',
-            email: 'alice.smith@example.com',
-            age: '30'
-        },
-        {
-            id: 15,
-            name: 'Bob Johnson',
-            email: 'bob.johnson@example.com',
-            age: '32'
-        },
-        {
-            id: 16,
-            name: 'Emily Brown',
-            email: 'emily.brown@example.com',
-            age: '25'
-        },
-        {
-            id: 17,
-            name: 'Michael Wilson',
-            email: 'michael.wilson@example.com',
-            age: '29'
-        },
-        {
-            id: 18,
-            name: 'Sophia Lee',
-            email: 'sophia.lee@example.com',
-            age: '27'
-        },
-        {
-            id: 19,
-            name: 'William Taylor',
-            email: 'william.taylor@example.com',
-            age: '31'
-        },
-        {
-            id: 20,
-            name: 'Olivia Martinez',
-            email: 'olivia.martinez@example.com',
-            age: '33'
-        },
-        {
-            id: 21,
-            name: 'Daniel Anderson',
-            email: 'daniel.anderson@example.com',
-            age: '34'
+    const handleChange = (e: ChangeEvent<any>) => {
+        const { name, value } = e.target;
+        if (name === 'price') {
+            if (value === '' || !isNaN(Number(value))) {
+                setFormData({ ...formData, [name]: value });
+            }
+        } else {
+            let parsedValue: string | number;
+            if (name === 'passengersid') {
+                parsedValue = value === '1' ? '2' : value === '2' ? '4' : '5';
+                setFormData({ ...formData, passengers: parsedValue, [name]: value });
+            } else if (name === 'gearid') {
+                parsedValue = value === '1' ? 'Auto' : 'Manual';
+                setFormData({ ...formData, gear: parsedValue, [name]: value });
+            } else if (name === 'coolingtypeid') {
+                parsedValue = value === '1' ? 'Air Conditioning' : 'Non A/C';
+                setFormData({ ...formData, coolingtype: parsedValue, [name]: value });
+            } else if (name === 'doorstypeid') {
+                parsedValue = value === '1' ? '2' : value === '2' ? '4' : '5';
+                setFormData({ ...formData, doorstype: parsedValue, [name]: value });
+            } else {
+                parsedValue = value;
+                setFormData({ ...formData, [name]: parsedValue });
+            }
         }
-    ];
+    };
 
-    const [records, setRecords] = useState(data);
-    const handleFilter = (event: ChangeEvent<HTMLInputElement>) => {
-        const inputValue = event.target.value.toLowerCase();
-        const filteredData = data.filter(row => {
-            return row.name.toLowerCase().includes(inputValue) ||
-                row.email.toLowerCase().includes(inputValue) ||
-                row.age.toLowerCase().includes(inputValue);
-        });
-        setRecords(filteredData);
-    }
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        try {
+            const errors: { [key: string]: string } = {};
+            if (!formData.name.trim()) {
+                errors.name = 'Car Name is Required';
+            }
+            if (!formData.image) {
+                errors.image = 'Image is Required';
+            }
+            if (!formData.passengersid) {
+                errors.passengers = 'Passengers is Required';
+            }
+            if (!formData.gearid) {
+                errors.gear = 'Gear is Required';
+            }
+            if (!formData.coolingtypeid) {
+                errors.coolingtype = 'Cooling Type is Required';
+            }
+            if (!formData.doorstypeid) {
+                errors.doorstype = 'Doors Type is Required';
+            }
+            if (!formData.price) {
+                errors.price = 'Price is Required';
+            }
+
+            // If there are any errors, set them in the form data state and return
+            if (Object.keys(errors).length > 0) {
+                setFormData(prevState => ({ ...prevState, errors }));
+                return;
+            }
+
+            if (id !== '') {
+                let updatedImageData = formData.image;
+                if (typeof formData.image === 'string') {
+                    const uploadedFileInput = document.getElementById('image') as HTMLInputElement | null;
+                    const uploadedFile = uploadedFileInput?.files?.[0];
+                    if (uploadedFile) {
+                        const imageName = uploadedFile.name;
+
+                        const formDataImage = new FormData();
+                        formDataImage.append('file', uploadedFile);
+
+                        await axios.post("http://localhost:5000/upload", formDataImage);
+
+                        updatedImageData = imageName;
+                    }
+                }
+                const updatedFormData = { ...formData, image: updatedImageData };
+
+                const response = await axios.put(`http://localhost:5000/carmaster/${id}`, updatedFormData);
+                console.log(response.data);
+                setSidebarOpen(false);
+            } else {
+                let imageName = "";
+                if (formData.image) {
+                    const file = (e.target as HTMLFormElement).elements.namedItem('image') as HTMLInputElement;
+                    if (file && file.files && file.files[0]) {
+                        const uploadedFile = file.files[0];
+                        imageName = `${uploadedFile.name}`;
+
+                        const formData = new FormData();
+                        formData.append('file', uploadedFile);
+
+                        await axios.post("http://localhost:5000/upload", formData);
+                    }
+                }
+                formData.image = imageName;
+
+                const response = await axios.post("http://localhost:5000/carmaster", formData);
+                console.log(response.data);
+            }
+
+            setFormData(prevState => ({ ...prevState, errors: {} }));
+            fetchCarsData();
+            handleReset();
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    useEffect(() => {
+        fetchCarsData();
+    }, []);
+
+    const fetchCarsData = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/carmaster');
+            setCarsData(response.data);
+        } catch (error) {
+            console.error('Error fetching cars:', error);
+        }
+    };
+
+    const handleDelete = async (id: any) => {
+        try {
+            await axios.delete(`http://localhost:5000/carmaster/${id}`);
+            fetchCarsData();
+        } catch (error) {
+            console.error('Error deleting car:', error);
+        }
+    };
+
+    const handleEdit = async (id: any) => {
+        OpenSidebar(false, id);
+        try {
+            const response = await axios.get<FormData>(`http://localhost:5000/carmaster/${id}`);
+            setFormData(response.data);
+            setid(id);
+
+            console.log('Editing carmaster data with id:', id);
+        } catch (error) {
+            console.error('Error fetching carmaster data:', error);
+        }
+    };
+
+    const handleReset = () => {
+        setFormData({ name: "", image: "", passengersid: "", gearid: "", coolingtypeid: "", doorstypeid: "", price: "" });
+    };
+
+    const handleFilter = (e: ChangeEvent<HTMLInputElement>) => {
+        setSearchQuery(e.target.value);
+    };
+
+    const filteredCarsData = carsdata.filter(car =>
+        car.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     return (
         <>
@@ -213,7 +271,7 @@ const CarList: React.FC = () => {
                     <div className="container-fluid rounded full-height-container">
                         <div className="row align-items-center mb-0 py-3 gx-2">
                             <div className="col">
-                                <h3 className="fw-bold fs-5 mb-0 ">Admin Dashboard</h3>
+                                <h3 className="fw-bold fs-5 mb-0 ">Car Master</h3>
                             </div>
                             <div className="col-auto">
                                 <div className="input-group">
@@ -230,7 +288,7 @@ const CarList: React.FC = () => {
 
                         <DataTable
                             columns={columns}
-                            data={records}
+                            data={filteredCarsData}
                             pagination
                             customStyles={TableStyles}
                         />
@@ -241,60 +299,152 @@ const CarList: React.FC = () => {
                 <Footer />
             </div>
 
-            {/* Sidebar */}
-            <div id="right-sidebar" className={`right-sidebar ${sidebarOpen ? 'active' : ''}`}>
-                <div className="container px-3">
-                    <div className="py-3">
-                        <h2 className="fs-5 fw-600">{isAdding ? 'Add Car Details Master' : 'Update Car Details Master'}</h2>
-                        <button type="button" className="close-btn py-1 px-3 mt-1" onClick={closeSidebar}>
-                            <i className="bi bi-x-lg text-danger"></i>
-                        </button>
-                    </div>
-                    <main className="content cr-container-right-sidebar-form">
-                        <form id="holidayForm">
+            <div id="right-sidebar" className={`right-sidebar modal-Default ${sidebarOpen ? 'active' : ''}`}>
+                <div className="py-3 px-3">
+                    <h2 className="fs-5 fw-600">{isAdding ? 'Add Car Details Master' : 'Update Car Details Master'}</h2>
+                    <button type="button" className="close-btn py-1 px-3 mt-1" onClick={closeSidebar}>
+                        <i className="bi bi-x-lg text-danger"></i>
+                    </button>
+                </div>
+                <div className="container px-3 right-sidebar-overflow">
+                    <main className="content rounded cr-container-right-sidebar-form">
+                        <form id="carmasterForm" onSubmit={handleSubmit}>
                             <div className="container-fluid rounded bg-white py-3">
-                                <div className="mb-3">
-                                    <label className="form-label form-label-custom-margin cr-form-title">Holiday Name<span> *</span></label>
-                                    <input type="text" className="form-control border border-custom cr-form-input-type" id="holidayName" name="holidayName" required defaultValue={editedRow?.name || ''} />
+                                <div className="row">
+                                    <div className="col-12">
+                                        <div className="form-group mb-3">
+                                            <label className="form-label form-label-custom-margin cr-form-title">Car Name<span className='text-danger'> *</span></label>
+                                            <input
+                                                type="text"
+                                                className={`form-control border border-custom cr-form-input-type ${formData.errors?.name && 'is-invalid'}`}
+                                                id="name"
+                                                name="name"
+                                                value={formData.name}
+                                                onChange={handleChange}
+                                            />
+                                            {formData.errors?.name && <div className="invalid-feedback">{formData.errors.name}</div>}
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="mb-3">
-                                    <label className="form-label form-label-custom-margin cr-form-title">Holiday Type<span> *</span></label>
-                                    <select className="form-select border border-custom cr-form-input-type" id="holidayType" name="holidayType"
-                                        required>
-                                        <option value="Festival Leave">Festival Leave</option>
-                                        <option value="Public Holiday">Public Holiday</option>
-                                        <option value="Company Holiday">Company Holiday</option>
-                                        <option value="Other">Other</option>
-                                    </select>
+                                <div className='row'>
+                                    <div className="col-12">
+                                        <div className="form-group mb-3">
+                                            <label htmlFor="image" className="form-label form-label-custom-margin cr-form-title">Image <span className='text-danger'> *</span></label>
+                                            <input
+                                                type="file"
+                                                className={`form-control-file form-control border border-custom cr-form-input-type ${formData.errors?.image && 'is-invalid'}`}
+                                                id="image"
+                                                name="image"
+                                                onChange={handleChange}
+                                            />
+                                            {formData.errors?.image && <div className="invalid-feedback">{formData.errors.image}</div>}
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="mb-3">
-                                    <label className="form-label form-label-custom-margin cr-form-title">Short Code<span> *</span></label>
-                                    <input type="text" className="form-control border border-custom cr-form-input-type" id="shortName" name="shortName" required defaultValue={editedRow?.age || ''} />
+                                <div className="row">
+                                    <div className="col-6">
+                                        <div className="form-group mb-3">
+                                            <label htmlFor="passengersid" className="form-label form-label-custom-margin cr-form-title">Passengers <span className='text-danger'> *</span></label>
+                                            <select
+                                                className={`form-select border border-custom ${formData.errors?.passengers && 'is-invalid'}`}
+                                                id="passengersid"
+                                                name="passengersid"
+                                                value={formData.passengersid}
+                                                onChange={handleChange}
+                                            >
+                                                <option value="">Please Select Type</option>
+                                                <option value="1">2</option>
+                                                <option value="2">4</option>
+                                                <option value="3">5</option>
+                                            </select>
+                                            {formData.errors?.passengers && <div className="invalid-feedback">{formData.errors.passengers}</div>}
+                                        </div>
+                                    </div>
+                                    <div className="col-6">
+                                        <div className="form-group mb-3">
+                                            <label htmlFor="gearid" className="form-label form-label-custom-margin cr-form-title">Gear <span className='text-danger'> *</span></label>
+                                            <select
+                                                className={`form-select border border-custom ${formData.errors?.gear && 'is-invalid'}`}
+                                                id="gearid"
+                                                name="gearid"
+                                                value={formData.gearid}
+                                                onChange={handleChange}
+                                            >
+                                                <option value="">Please Select Type</option>
+                                                <option value="1">Auto</option>
+                                                <option value="2">Manual</option>
+                                            </select>
+                                            {formData.errors?.gear && <div className="invalid-feedback">{formData.errors.gear}</div>}
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="mb-3">
-                                    <label className="form-label form-label-custom-margin cr-form-title">Date<span> *</span></label>
-                                    <input type="date" className="form-control border border-custom cr-form-input-type" id="date" name="date" required />
+                                <div className="row">
+                                    <div className="col-6">
+                                        <div className="form-group mb-3">
+                                            <label htmlFor="coolingtypeid" className="form-label form-label-custom-margin cr-form-title">Cooling Type <span className='text-danger'> *</span></label>
+                                            <select
+                                                className={`form-select border border-custom ${formData.errors?.coolingtype && 'is-invalid'}`}
+                                                id="coolingtypeid"
+                                                name="coolingtypeid"
+                                                value={formData.coolingtypeid}
+                                                onChange={handleChange}
+                                            >
+                                                <option value="">Please Select Type</option>
+                                                <option value="1">Air Conditioning</option>
+                                                <option value="2">Non A/C</option>
+                                            </select>
+                                            {formData.errors?.coolingtype && <div className="invalid-feedback">{formData.errors.coolingtype}</div>}
+                                        </div>
+                                    </div>
+                                    <div className="col-6">
+                                        <div className="form-group mb-3">
+                                            <label htmlFor="doorstypeid" className="form-label form-label-custom-margin cr-form-title">Doors Type <span className='text-danger'> *</span></label>
+                                            <select
+                                                className={`form-select border border-custom ${formData.errors?.doorstype && 'is-invalid'}`}
+                                                id="doorstypeid"
+                                                name="doorstypeid"
+                                                value={formData.doorstypeid}
+                                                onChange={handleChange}
+                                            >
+                                                <option value="">Please Select Type</option>
+                                                <option value="1">2</option>
+                                                <option value="2">4</option>
+                                                <option value="3">5</option>
+                                            </select>
+                                            {formData.errors?.doorstype && <div className="invalid-feedback">{formData.errors.doorstype}</div>}
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="mb-3">
-                                    <label className="form-label form-label-custom-margin cr-form-title">Description</label>
-                                    <textarea className="form-control border border-custom cr-form-input-type" id="description" name="description" rows={1} defaultValue={editedRow?.email || ''}></textarea>
+                                <div className="row">
+                                    <div className="col-12">
+                                        <div className="form-group mb-3">
+                                            <label className="form-label form-label-custom-margin cr-form-title">Price<span className='text-danger'> *</span></label>
+                                            <input
+                                                type="text"
+                                                className={`form-control border border-custom cr-form-input-type ${formData.errors?.price && 'is-invalid'}`}
+                                                id="price"
+                                                name="price"
+                                                value={formData.price}
+                                                onChange={handleChange}
+                                            />
+                                            {formData.errors?.price && <div className="invalid-feedback">{formData.errors.price}</div>}
+                                        </div>
+                                    </div>
                                 </div>
-
                                 <div className="row gx-2 justify-content-end">
                                     <div className="col-auto">
                                         <button type="submit" className="btn btn-primary custom-button-border">{isAdding ? 'Submit' : 'Update'}</button>
                                     </div>
                                     <div className="col-auto">
-                                        <button type="reset" className="btn custom-button-border bg-white">Reset</button>
+                                        <button type="reset" className="btn custom-button-border bg-white" onClick={handleReset}>Reset</button>
                                     </div>
                                 </div>
-
                             </div>
-                        </form>
+                        </form >
 
-                    </main>
-                </div>
-            </div>
+                    </main >
+                </div >
+            </div >
         </>
     )
 }

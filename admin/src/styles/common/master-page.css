@@ -35,7 +35,6 @@
     right: -400px;
     /* Initially position outside the viewport */
     height: 100vh;
-    width: 400px;
     z-index: 1000;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
     transition: right 0.3s ease;
@@ -85,4 +84,93 @@
 .cr-form-input-type {
     height: 33px;
     font-size: 14px;
+}
+
+.form-select.is-invalid {
+    --bs-form-select-bg-icon: none !important;
+}
+.form-control.is-invalid {
+    background-image: none !important;
+}
+
+.right-sidebar-overflow::-webkit-scrollbar {
+    width: 10px;
+}
+
+  /* Track */
+.right-sidebar-overflow::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+  /* Handle */
+.right-sidebar-overflow::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+  /* Handle on hover */
+.right-sidebar-overflow::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+.right-sidebar-overflow {
+    overflow-y: scroll;
+    max-height: 580px;
+    padding: 2px 0px 15px 0px;
+}
+
+.remove-right-sidebar-overflow {
+    overflow: hidden;
+}
+
+.cr-form-input-type-textarea {
+    font-size: 14px;
+}
+
+.modal-Small {
+    width: 300px;
+    right: -300px;
+}
+
+.modal-Small.active {
+    right: 0 !important;
+}
+
+.modal-Default {
+    width: 500px;
+    right: -500px;
+}
+
+.modal-Default.active {
+    right: 0 !important;
+}
+
+.modal-large {
+    width: 800px;
+    right: -800px;
+}
+
+.modal-large.active {
+    right: 0 !important;
+}
+
+.modal-Extralarge {
+    width: 1140px;
+    right: -1140px;
+}
+
+.modal-Extralarge.active {
+    right: 0 !important;
+}
+
+.cursor-pointer:hover {
+    cursor: pointer;
+}
+
+.error-message-div {
+    color: rgba(255, 0, 0, 1);
+    margin-top: -20px;
+}
+
+.table-font-custom th {
+    font-weight: 500;
 }

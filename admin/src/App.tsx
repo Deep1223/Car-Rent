@@ -15,7 +15,6 @@ const App: React.FC = () => {
       <Suspense fallback={<div className="loading-container"><div className="loader"></div></div>}>
         <Header />
         <MasterPage />
-        {/* Hello World */}
       </Suspense>
     </div>
   );

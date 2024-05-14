@@ -116,8 +116,10 @@ a.sidebar-link:hover {
 
 #sidebar.expand .sidebar-link[data-bs-toggle="collapse"].collapsed::after {
     transform: rotate(45deg);
-    transition: all .2s ease-out;
-    color: #8f97ad;
+}
+
+#sidebar.expand .sidebar-link[data-bs-toggle="collapse"][aria-expanded="true"]::after {
+    transform: rotate(90deg);
 }
 
 .sidebar-dropdown a {

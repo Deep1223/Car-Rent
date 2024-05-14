@@ -15,21 +15,21 @@ const Header: React.FC = () => {
         <div className="header">
             <div className="cr-flex header-component">
                 <div className="header-logo-div">
-                    <a href="javaScript:void(0)" onClick={()=> handleNavigation('/carrent')}><img src={Logo} alt="logo" /></a>
+                    <a href="javascript:void(0)" onClick={()=> handleNavigation('/carrent')}><img src={Logo} alt="logo" /></a>
                 </div>
                 <div className="header-component-div cr-align-item">
-                    <p className="cr-header"><a href="javaScript:void(0)">Become a renter</a></p>
-                    <p className="cr-header"><a href="javaScript:void(0)">Rental deals</a></p>
-                    <p className="cr-header"><a href="javaScript:void(0)">How it work</a></p>
-                    <p className="cr-header"><a href="javaScript:void(0)">choose us</a></p>
+                    <p className="cr-header"><a href="javascript:void(0)">Become a renter</a></p>
+                    <p className="cr-header"><a href="javascript:void(0)">Rental deals</a></p>
+                    <p className="cr-header"><a href="javascript:void(0)">How it work</a></p>
+                    <p className="cr-header"><a href="javascript:void(0)">choose us</a></p>
                 </div>
                 <div className="header-login-div cr-align-item">
-                    <a href="javaScript:void(0)" onClick={() => handleNavigation('/signin')}>
+                    <a href="javascript:void(0)" onClick={() => handleNavigation('/signin')}>
                         <div className="header-signin-button-div">
                             <div>Sign in</div>
                         </div>
                     </a>
-                    <a href="javaScript:void(0)" onClick={() => handleNavigation('/signup')}>
+                    <a href="javascript:void(0)" onClick={() => handleNavigation('/signup')}>
                         <div className="header-signup-button-div">
                             <div className="cr-btn-text">Sign up</div>
                         </div>

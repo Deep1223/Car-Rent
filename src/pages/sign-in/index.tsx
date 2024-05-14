@@ -50,7 +50,7 @@ const SignIn = () => {
                 <div className="col-lg-4 d-flex align-items-center justify-content-center">
                     <div className="col-sm-8"> {/* Adjust the width of the right side */}
                         {/* Logo */}
-                        <a href="javaScript:void(0)" onClick={() => handleNavigation('/carrent')} className="d-flex justify-content-center mb-4">
+                        <a href="javascript:void(0)" onClick={() => handleNavigation('/carrent')} className="d-flex justify-content-center mb-4">
                             <img src={Logo} alt="logo" />
                         </a>
                         {/* / Logo */}
@@ -95,7 +95,7 @@ const SignIn = () => {
                                     </label>
                                 </div>
                                 <div>
-                                    <small><a href="javaScript:void(0)">Forgot Password?</a></small>
+                                    <small><a href="javascript:void(0)">Forgot Password?</a></small>
                                 </div>
                             </div>
                             <button type="submit" className="btn btn-primary btn-lg w-100">Sign In</button>
@@ -104,7 +104,7 @@ const SignIn = () => {
 
                         <div className="text-center">
                             <small>Don't have an account?
-                                <a href="javaScript:void(0)" onClick={() => handleNavigation('/signup')} className="fw-bold">Sign Up</a>
+                                <a href="javascript:void(0)" onClick={() => handleNavigation('/signup')} className="fw-bold">Sign Up</a>
                             </small>
                         </div>
                     </div>
